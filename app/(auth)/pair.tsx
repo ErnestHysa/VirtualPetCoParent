@@ -134,7 +134,7 @@ export default function PairScreen() {
                   placeholder="XXX-XXX"
                   placeholderTextColor={NEUTRAL[400]}
                   value={inputCode}
-                  onChangeText={(text) => {
+                  onChangeText={(text: string) => {
                     // Auto-format
                     const formatted = text
                       .toUpperCase()

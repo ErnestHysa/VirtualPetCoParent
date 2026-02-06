@@ -11,7 +11,7 @@ import Animated, {
   useAnimatedStyle,
   withSpring,
 } from 'react-native-reanimated';
-import { LinearGradient } from 'expo-linear-gradient';
+import { LinearGradient } from '@/components/ui/LinearGradient';
 import { colors, typography, spacing, borderRadius, shadows } from '@/constants/designTokens';
 import { AnimatedPet } from '@/components/AnimatedPet';
 import { useHapticFeedback } from '@/hooks/useHapticFeedback';
@@ -112,7 +112,7 @@ export default function ForgotPasswordScreen() {
               species={formState === 'success' ? 'cat' : 'dragon'}
               color={formState === 'success' ? 'sky' : 'rose'}
               size={100}
-              emotion={formState === 'success' ? 'happy' : 'curious'}
+              emotion={formState === 'success' ? 'happy' : 'excited'}
               testID="forgot-password-pet"
             />
           </View>

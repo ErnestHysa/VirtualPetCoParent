@@ -268,20 +268,21 @@ export const useAuthStore = create<AuthState>()(
             .eq('id', codeData.user_id)
             .single();
 
-          const partner: UserProfile = partnerProfile ? {
+          const partner: UserProfile | null = partnerProfile ? {
             id: partnerProfile.id,
-            email: user.email || '',
+            email: partnerProfile.email || '',
             username: partnerProfile.username,
             createdAt: new Date(partnerProfile.created_at),
           } : null;
 
-          const couple: Couple = coupleData ? {
+          const couple: Couple | null = coupleData ? {
             id: coupleData.id,
             user1Id: coupleData.user1_id,
             user2Id: coupleData.user2_id,
             petId: coupleData.pet_id,
             startDate: new Date(coupleData.start_date),
             milestonesUnlocked: coupleData.milestones_unlocked,
+            daysTogether: 0,
           } : null;
 
           set({ couple, partner });

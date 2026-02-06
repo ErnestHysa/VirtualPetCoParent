@@ -51,6 +51,11 @@ interface UIState {
 
   // Onboarding
   hasCompletedOnboarding: boolean;
+
+  // Notification preferences
+  careRemindersEnabled: boolean;
+  partnerActionsEnabled: boolean;
+
   currentOnboardingStep: number;
 
   // Internal
@@ -70,6 +75,9 @@ interface UIState {
   setCurrentOnboardingStep: (step: number) => void;
   completeOnboarding: () => void;
 
+  setCareRemindersEnabled: (enabled: boolean) => void;
+  setPartnerActionsEnabled: (enabled: boolean) => void;
+
   // Helpers
   getColor: (lightColor: string, darkColor: string) => string;
 }
@@ -87,6 +95,8 @@ export const useUIStore = create<UIState>()(
       reduceMotion: false,
       hapticFeedback: true,
       hasCompletedOnboarding: false,
+      careRemindersEnabled: true,
+      partnerActionsEnabled: true,
       currentOnboardingStep: 0,
       _toastTimer: null,
 
@@ -131,6 +141,8 @@ export const useUIStore = create<UIState>()(
       setOnboardingComplete: (hasCompletedOnboarding) => set({ hasCompletedOnboarding }),
       setCurrentOnboardingStep: (currentOnboardingStep) => set({ currentOnboardingStep }),
       completeOnboarding: () => set({ hasCompletedOnboarding: true, currentOnboardingStep: 0 }),
+      setCareRemindersEnabled: (careRemindersEnabled) => set({ careRemindersEnabled }),
+      setPartnerActionsEnabled: (partnerActionsEnabled) => set({ partnerActionsEnabled }),
 
       // Get color based on theme
       getColor: (lightColor, darkColor) => {
@@ -146,6 +158,8 @@ export const useUIStore = create<UIState>()(
         reduceMotion: state.reduceMotion,
         hapticFeedback: state.hapticFeedback,
         hasCompletedOnboarding: state.hasCompletedOnboarding,
+        careRemindersEnabled: state.careRemindersEnabled,
+        partnerActionsEnabled: state.partnerActionsEnabled,
         // Exclude _toastTimer from persistence (runtime-only)
       }),
     }

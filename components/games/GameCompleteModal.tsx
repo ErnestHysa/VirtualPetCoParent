@@ -16,7 +16,7 @@ import Animated, {
   runOnJS,
   interpolate,
 } from 'react-native-reanimated';
-import { LinearGradient } from 'expo-linear-gradient';
+import { LinearGradient } from '@/components/ui/LinearGradient';
 import { colors, borderRadius, motion } from '../../constants/designTokens';
 import { useHapticFeedback } from '../../hooks/useHapticFeedback';
 

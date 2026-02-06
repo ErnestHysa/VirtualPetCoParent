@@ -9,21 +9,22 @@ import Animated, { FadeIn } from 'react-native-reanimated';
 import { useRouter } from 'expo-router';
 import { useUIStore, useAuthStore } from '@/stores';
 import { Card } from '@/components/ui/Card';
-import { Button } from '@/components/ui/Button';
 import { BACKGROUND, NEUTRAL, PRIMARY } from '@/constants/colors';
 
 export default function SettingsScreen() {
   const router = useRouter();
   const {
-    theme,
     setTheme,
     reduceMotion,
     setReduceMotion,
     hapticFeedback,
     setHapticFeedback,
-    signOut,
+    careRemindersEnabled,
+    setCareRemindersEnabled,
+    partnerActionsEnabled,
+    setPartnerActionsEnabled,
   } = useUIStore();
-  const { user, partner } = useAuthStore();
+  const { user, partner, signOut } = useAuthStore();
   const { colorScheme } = useUIStore();
 
   const handleSignOut = async () => {
@@ -31,7 +32,7 @@ export default function SettingsScreen() {
     router.replace('/(auth)/signup');
   };
 
-  const settingsGroups = [
+  const settingsGroups: any[] = [
     {
       title: 'Appearance',
       items: [
@@ -61,14 +62,14 @@ export default function SettingsScreen() {
         {
           label: 'Care Reminders',
           type: 'toggle',
-          value: true,
-          onValueChange: () => {},
+          value: careRemindersEnabled,
+          onValueChange: setCareRemindersEnabled,
         },
         {
           label: 'Partner Actions',
           type: 'toggle',
-          value: true,
-          onValueChange: () => {},
+          value: partnerActionsEnabled,
+          onValueChange: setPartnerActionsEnabled,
         },
       ],
     },
@@ -144,10 +145,10 @@ export default function SettingsScreen() {
               {group.title}
             </Text>
             <Card variant="bordered" padding={0}>
-              {group.items.map((item, itemIndex) => (
+              {group.items.map((item: any, itemIndex: number) => (
                 <TouchableOpacity
                   key={itemIndex}
-                  onPress={item.onPress}
+                  onPress={item.type === 'toggle' ? undefined : item.onPress}
                   disabled={item.type === 'toggle'}
                   activeOpacity={0.7}
                 >

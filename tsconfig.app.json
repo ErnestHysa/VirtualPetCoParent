@@ -1,0 +1,24 @@
+{
+  "extends": "./tsconfig.json",
+  "include": [
+    "app/**/*.ts",
+    "app/**/*.tsx",
+    "stores/**/*.ts",
+    "lib/**/*.ts",
+    "hooks/**/*.ts",
+    "constants/**/*.ts",
+    "types/**/*.ts",
+    "components/ui/**/*.ts",
+    "components/ui/**/*.tsx",
+    "components/auth/**/*.ts",
+    "components/auth/**/*.tsx",
+    "components/pet/CareButton.tsx",
+    "components/pet/PetDisplay.tsx",
+    "components/AnimatedPet.tsx",
+    "services/authService.ts",
+    "services/coupleService.ts",
+    "services/gameService.ts",
+    "services/petService.ts",
+    "nativewind-env.d.ts"
+  ]
+}

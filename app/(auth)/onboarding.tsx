@@ -21,7 +21,7 @@ export default function OnboardingScreen() {
   const { colorScheme } = useUIStore();
   const [currentStep, setCurrentStep] = useState(0);
   const [selectedSpecies, setSelectedSpecies] = useState<PetSpecies>('dragon');
-  const [selectedColor, setSelectedColor] = useState(PET_COLORS[0].id);
+  const [selectedColor, setSelectedColor] = useState<string>(PET_COLORS[0].id);
   const [petName, setPetName] = useState('');
 
   const canProceed = () => {

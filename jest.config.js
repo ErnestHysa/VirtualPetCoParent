@@ -19,6 +19,7 @@ module.exports = {
   ],
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/$1',
+    '^expo-linear-gradient$': '<rootDir>/components/ui/LinearGradient.tsx',
   },
   globals: {
     'ts-jest': {

@@ -95,7 +95,7 @@ export default function CareScreen() {
                     ]}
                   >
                     <View style={styles.actionContent}>
-                      <View style={[styles.actionIcon, { backgroundColor: CARE_ACTION_COLORS[action] + '30' }]}>
+                      <View style={[styles.actionIcon, { backgroundColor: CARE_ACTION_COLORS[action as keyof typeof CARE_ACTION_COLORS] + '30' }]}>
                         <Text style={styles.actionEmoji}>{detail.emoji}</Text>
                       </View>
                       <View style={styles.actionInfo}>
