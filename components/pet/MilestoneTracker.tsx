@@ -20,7 +20,7 @@ import Animated, {
   withTiming,
   interpolate,
 } from 'react-native-reanimated';
-import { LinearGradient } from 'expo-linear-gradient';
+import { LinearGradient } from '@/components/ui/LinearGradient';
 import { BlurView } from 'expo-blur';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { colors, typography, spacing, borderRadius, motion } from '../../constants/designTokens';

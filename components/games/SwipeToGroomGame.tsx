@@ -19,7 +19,7 @@ import Animated, {
   interpolateColor,
   Easing,
 } from 'react-native-reanimated';
-import { LinearGradient } from 'expo-linear-gradient';
+import { LinearGradient } from '@/components/ui/LinearGradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { colors, borderRadius, motion } from '../../constants/designTokens';
 import { useHapticFeedback } from '../../hooks/useHapticFeedback';

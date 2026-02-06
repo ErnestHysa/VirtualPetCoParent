@@ -8,8 +8,8 @@ import {
   View,
   StyleSheet,
   ViewStyle,
+  StyleProp,
   TouchableOpacity,
-  AccessibilityInfo,
 } from 'react-native';
 import { BlurView } from 'expo-blur';
 import { useUIStore } from '@/stores';
@@ -17,7 +17,7 @@ import { BACKGROUND, NEUTRAL } from '@/constants/colors';
 
 interface CardProps {
   children: React.ReactNode;
-  style?: ViewStyle;
+  style?: StyleProp<ViewStyle>;
   onPress?: () => void;
   disabled?: boolean;
   variant?: 'default' | 'glass' | 'elevated' | 'bordered';

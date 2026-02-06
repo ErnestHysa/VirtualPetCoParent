@@ -15,7 +15,7 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 import { BlurView } from 'expo-blur';
-import { LinearGradient } from 'expo-linear-gradient';
+import { LinearGradient } from '@/components/ui/LinearGradient';
 import { colors, typography, borderRadius, spacing, motion } from '../../constants/designTokens';
 import { useHapticFeedback } from '../../hooks/useHapticFeedback';
 

@@ -6,7 +6,7 @@ import Animated, {
   useAnimatedStyle,
   withSpring,
 } from 'react-native-reanimated';
-import { LinearGradient } from 'expo-linear-gradient';
+import { LinearGradient } from '@/components/ui/LinearGradient';
 import { colors, typography, motion, spacing, borderRadius, shadows } from '../../constants/designTokens';
 import { AnimatedPet } from '../../components/AnimatedPet';
 import { useHapticFeedback } from '../../hooks/useHapticFeedback';
@@ -64,7 +64,10 @@ export default function LoginScreen() {
 
     try {
       // Call the auth store signIn method
-      await signIn({ email, password });
+      const success = await signIn(email, password);
+      if (!success) {
+        throw new Error('Invalid login credentials');
+      }
 
       trigger('success');
       router.replace('/(tabs)');
@@ -161,7 +164,7 @@ export default function LoginScreen() {
               autoCorrect={false}
               style={[
                 styles.textInput,
-                error && email.trim() === 0 ? styles.textInputError : null,
+                error && email.trim().length === 0 ? styles.textInputError : null,
               ]}
               accessibilityLabel="Email input"
               accessibilityHint="Enter your email address"
@@ -186,7 +189,7 @@ export default function LoginScreen() {
                 style={[
                   styles.textInput,
                   styles.passwordInput,
-                  error && password.trim() === 0 ? styles.textInputError : null,
+                  error && password.trim().length === 0 ? styles.textInputError : null,
                 ]}
                 accessibilityLabel="Password input"
                 accessibilityHint="Enter your password"

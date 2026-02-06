@@ -7,7 +7,7 @@ import Animated, {
   withSpring,
   withDelay,
 } from 'react-native-reanimated';
-import { LinearGradient } from 'expo-linear-gradient';
+import { LinearGradient } from '@/components/ui/LinearGradient';
 import { colors, typography, motion, spacing, borderRadius, shadows } from '../../constants/designTokens';
 import { AnimatedPet } from '../../components/AnimatedPet';
 import { useOnboardingStore, PetColor } from '../../stores/onboardingStore';

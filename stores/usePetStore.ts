@@ -68,6 +68,7 @@ interface PetState {
   // Utility
   getNeedsAttention: () => boolean;
   getMoodMessage: () => string;
+  syncPet: () => Promise<void>;
 }
 
 export const usePetStore = create<PetState>()(
@@ -101,7 +102,7 @@ export const usePetStore = create<PetState>()(
 
         // Apply care effects
         const effects = CARE_EFFECTS[action];
-        let updatedPet: Pet | null = null;
+        let updatedPet: Pet | undefined;
 
         set((state) => {
           if (!state.pet) return state;
@@ -168,6 +169,20 @@ export const usePetStore = create<PetState>()(
         }
 
         return true;
+      },
+
+      syncPet: async () => {
+        const currentPetId = get().pet?.id;
+        if (!currentPetId) return;
+
+        try {
+          const latestPet = await petService.getPet(currentPetId);
+          if (!latestPet) return;
+
+          set({ pet: latestPet });
+        } catch (error) {
+          console.error('Failed to sync pet:', error);
+        }
       },
 
       // Check if care action can be performed

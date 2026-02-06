@@ -4,7 +4,7 @@
  */
 
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { Tabs } from 'expo-router';
 import { useUIStore } from '@/stores';
 import { BACKGROUND, NEUTRAL } from '@/constants/colors';
@@ -16,12 +16,6 @@ const TAB_ICONS: Record<string, string> = {
   settings: '⚙️',
 };
 
-const TAB_LABELS: Record<string, string> = {
-  index: 'Home',
-  care: 'Care',
-  games: 'Games',
-  settings: 'Settings',
-};
 
 export default function TabsLayout() {
   const { colorScheme } = useUIStore();
@@ -44,17 +38,6 @@ export default function TabsLayout() {
           fontSize: 12,
           fontWeight: '600',
           marginTop: 4,
-        },
-        tabBarIcon: ({ focused, color }: any) => {
-          const routeName = focused ? color : '';
-          return (
-            <View style={[
-              styles.iconContainer,
-              focused && styles.iconContainerFocused,
-            ]}>
-              <Text style={styles.icon}>{TAB_ICONS[routeName] || '📱'}</Text>
-            </View>
-          );
         },
       }}
     >

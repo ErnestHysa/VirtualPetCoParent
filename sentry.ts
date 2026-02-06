@@ -5,6 +5,9 @@
 
 import * as Sentry from '@sentry/react-native';
 
+type UserContext = { id: string; email?: string; username?: string } | null;
+type PetContext = { id: string; species: string; stage: string } | null;
+
 const SENTRY_DSN = process.env.EXPO_PUBLIC_SENTRY_DSN || process.env.SENTRY_DSN;
 const IS_DEV = __DEV__ || process.env.NODE_ENV === 'development';
 
@@ -39,17 +42,12 @@ export function initSentry() {
     // Integrations
     integrations: [
       new Sentry.ReactNativeTracing({
-        shouldCreateSpanForRequest: (url) => {
-          // Don't track Supabase health checks
-          return !url.includes('/health');
-        },
+        shouldCreateSpanForRequest: (url) => !url.includes('/health'),
       }),
-      new Sentry.ReactNativeReplay(),
-      new Sentry.BrowserTracing(),
     ],
 
     // beforeSend Filter
-    beforeSend(event, hint) => {
+    beforeSend: (event, hint) => {
       // Filter out expected errors in development
       if (IS_DEV) {
         console.error('Error caught by Sentry:', event, hint);
@@ -68,7 +66,7 @@ export function initSentry() {
     },
 
     // Before Send Transaction
-    beforeSendTransaction(transaction) {
+    beforeSendTransaction: (transaction) => {
       // Filter out long-running transactions in production
       if (!IS_DEV && transaction.startTimestamp) {
         const duration = (Date.now() - transaction.startTimestamp) / 1000;
@@ -77,33 +75,6 @@ export function initSentry() {
         }
       }
       return transaction;
-    },
-
-    // Attach User Context
-    attachUserContext(user: { id: string; email?: string; username?: string } | null) {
-      if (user) {
-        Sentry.setUser({
-          id: user.id,
-          email: user.email,
-          username: user.username,
-        });
-      } else {
-        Sentry.setUser(null);
-      }
-    },
-
-    // Attach Pet Context
-    attachPetContext(pet: { id: string; species: string; stage: string } | null) {
-      if (pet) {
-        Sentry.setContext('pet', {
-          species: pet.species,
-          stage: pet.stage,
-        });
-        Sentry.setTag('pet_species', pet.species);
-        Sentry.setTag('pet_stage', pet.stage);
-      } else {
-        Sentry.setContext('pet', null);
-      }
     },
 
     // Breadcrumbs
@@ -166,6 +137,33 @@ export function addBreadcrumb(
     data,
     level: 'info',
   });
+}
+
+export function attachUserContext(user: UserContext) {
+  if (user) {
+    Sentry.setUser({
+      id: user.id,
+      email: user.email,
+      username: user.username,
+    });
+    return;
+  }
+
+  Sentry.setUser(null);
+}
+
+export function attachPetContext(pet: PetContext) {
+  if (pet) {
+    Sentry.setContext('pet', {
+      species: pet.species,
+      stage: pet.stage,
+    });
+    Sentry.setTag('pet_species', pet.species);
+    Sentry.setTag('pet_stage', pet.stage);
+    return;
+  }
+
+  Sentry.setContext('pet', null);
 }
 
 /**

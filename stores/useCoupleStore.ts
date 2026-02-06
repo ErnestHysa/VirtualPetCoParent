@@ -308,7 +308,7 @@ export const useCoupleStore = create<CoupleStore>()(
         set((state) => {
           if (!state.couple) return state;
 
-          const anniversary = new Date(state.couple.anniversary_date);
+          const anniversary = new Date(state.couple.anniversary_date || new Date().toISOString());
           const today = new Date();
           const daysTogether = Math.floor(
             (today.getTime() - anniversary.getTime()) / (1000 * 60 * 60 * 24)
@@ -336,8 +336,8 @@ export const useCoupleStore = create<CoupleStore>()(
           const { data, error } = await supabase
             .from('milestones')
             .insert({
-              couple_id: couple.id,
               ...milestone,
+              couple_id: couple.id,
             })
             .select()
             .single();

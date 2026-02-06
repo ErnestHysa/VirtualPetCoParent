@@ -15,7 +15,7 @@ export default function AuthLayout() {
   return (
     <>
       <StatusBar
-        barStyle={colorScheme === 'dark' ? 'light-content' : 'dark-content'}
+        style={colorScheme === 'dark' ? 'light' : 'dark'}
         backgroundColor={colorScheme === 'dark' ? BACKGROUND.dark : BACKGROUND.light}
       />
       <Stack
